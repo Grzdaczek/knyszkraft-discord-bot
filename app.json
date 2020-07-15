@@ -1,0 +1,8 @@
+{
+  "name": "Knyszkraft discord bot",
+  "description": "A discord bot tracking players progress on minecraft server.",
+  "repository": "https://github.com/heroku/node-js-getting-started",
+  "logo": "https://cdn.rawgit.com/heroku/node-js-getting-started/master/public/node.svg",
+  "keywords": ["node", "discord", "minecraft", "heroku"],
+  "image": "heroku/nodejs"
+}

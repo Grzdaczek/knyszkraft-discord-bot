@@ -1,11 +1,23 @@
 {
-  "name": "node-example",
-  "version": "0.0.1",
-  "dependencies": {
-    "express": "2.5.x"
-  },
+  "name": "knyszkraft-discord-bot",
+  "version": "0.3.0",
+  "description": "A discord bot tracking players progress on minecraft server.",
   "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
-  }
+    "node": "12.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }
