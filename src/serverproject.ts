@@ -40,7 +40,7 @@ export const advancements = async (filter?: Function): Promise<Map<string, Advan
 		const advancements: Map<string, Advancment[]> = new Map()
 	
 		for (const entry of entryList) {
-			const id = path.basename(entry.name, '.json')
+			const id = path.basename(entry.name, '.json').replace(/\W/gi, '')
 			if(filter && !filter(id)) continue
 			const stream = await ftpGet(`./${entry.name}`)
 			const file = await new Promise((resolve, reject) => {
@@ -70,12 +70,12 @@ export const advancements = async (filter?: Function): Promise<Map<string, Advan
 					done: adv.done,
 				})
 			}
-			advancements.set(id.replace(/\W/gi, ''), advs)
+			advancements.set(id, advs)
 		}
 	
 		return advancements
 		
-	} 
+	}
 	catch(err) {
 		throw err
 	}

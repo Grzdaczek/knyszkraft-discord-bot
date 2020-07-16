@@ -1,21 +1,21 @@
 import { config as dotEnvConfig } from 'dotenv'
 import { Client } from 'discord.js'
 import * as commands from './commands'
-import * as serverproject from './serverproject'
 
 const dotEnvResult = dotEnvConfig()
 if(dotEnvResult.error) throw dotEnvResult.error
 
 const client = new Client()
-const cmds = new Map()
 
-cmds.set('!status', commands.status)
-cmds.set('!scoreboard', commands.scoreboard)
-cmds.set('!progress', commands.progress)
+const commandMatch: [RegExp, Function][] = [
+	[/^!status$/, commands.status],
+	[/^!scoreboard$/, commands.scoreboard],
+	[/^!progress( \S+)?$/, commands.progress],
+]
 
 client.on('message', msg => {
-	if(!cmds.has(msg.content)) return
-	else cmds.get(msg.content)(msg)
+	if(msg.content[0] !== '!') return
+	for (const [regex, fn] of commandMatch) if(msg.content.match(regex)) return fn(msg)
 })
 
 client.on('ready', () => {

@@ -43,5 +43,24 @@ export const scoreboard = async (msg: Message): Promise<void> => {
 }
 
 export const progress = async (msg: Message): Promise<void> => {
-	// console.log(await advancements())
+	try {
+		const username = msg.content.slice(10) || msg.author.username
+		console.log({username})
+		const profile = await mojang.getProfileByUsername(username)
+		if(!profile) {
+			msg.channel.send('Nie ma tu takiego. Spróbuj napisać \n```\n!progress [poprawna nazwa użytkownika]\n``` lub po prostu ustaw normalny pseudonim.')
+			msg.react('🤦')
+			return
+		}
+		msg.react('👌')
+		
+		const advs = await serverproject.advancements(id => id === profile.id)
+		const list = advs.get(profile.id).filter(adv => adv.type !== 'recipes' && !adv.done)
+		const messages = list.map(x => `\`\`\`js\n'${x.name}'\n${Object.keys(x.criteria).join('\n')}\n\`\`\``)
+		messages.forEach(m => msg.author.send(m))
+	}
+	catch (err) {
+		error(msg, err)
+		console.error(err)
+	}
 }
