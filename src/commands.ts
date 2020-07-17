@@ -63,11 +63,12 @@ export const progress = async (msg: Message): Promise<void> => {
 		
 		const advs = await serverproject.advancements(id => id === profile.id)
 		const list = advs.get(profile.id).filter(adv => adv.category !== 'recipes' && !adv.done)
+		if(!list.length) msg.author.send('Każde osiągnięcie w którym notowany jest postęp jest ukończone!')
 		const messages = list.map(x =>
 			`.${x.name.padEnd(20, '.')}: ` +
 			`${Math.floor(x.completion*100)}% ` +
 			`╠${''.padEnd(x.completion*30, '█').padEnd(30,'═')}╣ ` +
-			('[' + x.criteriaDone.length + '/' + (x.criteriaDone.length+x.criteriaLeft.length) + ']').padEnd(8, ' ') +
+			('[' + x.criteriaDone.length + '/' + (x.criteriaAll.length) + ']').padEnd(8, ' ') +
 			`/*${x.criteriaLeft.join(', ')}*/\n`
 		)
 		msg.react('👌')

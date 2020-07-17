@@ -6,6 +6,7 @@ export interface IAdvancment {
 	name: string,
 	fullName: string,
 	category: IAdvancmentCategory,
+	criteriaAll: string[],
 	criteriaDone: string[],
 	criteriaLeft: string[],
 	completion: number
@@ -86,13 +87,13 @@ export const advancmentsCriteria = {
 		'pufferfish',
 		'pumpkin_pie',
 		'rabbit_stew',
-		'raw_beef',
-		'raw_chicken',
-		'raw_cod',
-		'raw_mutton',
-		'raw_porkchop',
-		'raw_rabbit',
-		'raw_salmon',
+		'beef',
+		'chicken',
+		'cod',
+		'mutton',
+		'porkchop',
+		'rabbit',
+		'salmon',
 		'rotten_flesh',
 		'spider_eye',
 		'suspicious_stew',
@@ -164,7 +165,7 @@ export const advancmentsCriteria = {
 		'endermite',
 		'hoglin',
 		'piglin',
-		'vexe',
+		'vex',
 		'wither',
 		'zoglin'
 	]
@@ -221,13 +222,14 @@ export const advancements = async (filter?: Function): Promise<Map<string, IAdva
 				const adv = file[key]
 				const category: IAdvancmentCategory = found[0].slice(10) as any
 				const name = key.slice(category.length + 11)
+				const criteriaAll = advancmentsCriteria[name] || []
 				const criteriaDone = Object.keys(adv.criteria).map(c => c.replace(/(minecraft:)|(\w+\/)|(\.\w+)/g, ''))
-				const requiredCriteria = advancmentsCriteria[name] || []
-				const criteriaLeft = adv.done ? [] : requiredCriteria.filter(c => !criteriaDone.includes(c))
+				const criteriaLeft = adv.done ? [] : criteriaAll.filter(c => !criteriaDone.includes(c))
 				advs.push({
 					name,
 					fullName: key,
 					category,
+					criteriaAll,
 					criteriaDone,
 					criteriaLeft,
 					completion: adv.done ? 1 : criteriaDone.length / (criteriaDone.length + criteriaLeft.length),
