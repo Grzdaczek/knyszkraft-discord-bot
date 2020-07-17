@@ -67,7 +67,7 @@ export const progress = async (msg: Message): Promise<void> => {
 			`.${x.name.padEnd(20, '.')}: ` +
 			`${Math.floor(x.completion*100)}% ` +
 			`╠${''.padEnd(x.completion*30, '█').padEnd(30,'═')}╣ ` +
-			('[' + x.criteriaDone.length + '/' + x.criteriaDone.length+x.criteriaLeft.length + ']').padEnd(8, '') +
+			('[' + x.criteriaDone.length + '/' + (x.criteriaDone.length+x.criteriaLeft.length) + ']').padEnd(8, ' ') +
 			`/*${x.criteriaLeft.join(', ')}*/\n`
 		)
 		msg.react('👌')
