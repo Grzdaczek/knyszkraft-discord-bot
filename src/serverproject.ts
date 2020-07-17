@@ -168,6 +168,13 @@ export const advancmentsCriteria = {
 		'vex',
 		'wither',
 		'zoglin'
+	],
+	explore_nether: [
+		'crimson_forest',
+		'nether_wastes',
+		'soul_sand_valley',
+		'basalt_deltas',
+		'warped_forest'
 	]
 }
 
