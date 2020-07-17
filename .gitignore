@@ -2,7 +2,7 @@
 node_modules
 npm-debug.log
 
-# Dist - tsc output
+# Tsc output
 dist
 
 # Local development
