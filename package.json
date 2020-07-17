@@ -22,7 +22,7 @@
 		"@types/axios": "^0.14.0",
 		"@types/ftp": "^0.3.31",
 		"@types/node": "^14.0.23",
-		"@types/ramda": "^0.27.11"
+		"typescript": "^3.9.7"
 	},
 	"license": "MIT"
 }
