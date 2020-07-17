@@ -2,8 +2,10 @@ import { config as dotEnvConfig } from 'dotenv'
 import { Client } from 'discord.js'
 import * as commands from './commands'
 
-const dotEnvResult = dotEnvConfig()
-if(dotEnvResult.error) throw dotEnvResult.error
+if(process.env.NODE_ENV !== 'production') {
+	const dotEnvResult = dotEnvConfig()
+	if(dotEnvResult.error) throw dotEnvResult.error
+}
 
 const client = new Client()
 
